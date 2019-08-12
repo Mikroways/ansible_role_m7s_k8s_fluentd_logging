@@ -1,0 +1,6 @@
+---
+# defaults file for kubeways.fluentd-forwarder
+fluentd_logging_syslog_enabled: yes ## set yes or no
+fluentd_logging_syslog_host: 192.168.2.58
+fluentd_logging_syslog_port: 514
+fluentd_logging_syslog_protocol: udp
