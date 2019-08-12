@@ -11,9 +11,26 @@
     state: absent
   when: fluentd_logging_syslog_enabled == false
 
+- name: deploy service account for fluentd
+  k8s:
+    state: "{{ state }}"
+    definition: "{{ lookup('template', role_path + '/templates/service-account.yaml.j2') }}"
+  run_once: true
+
+- name: deploy cluster role for fluentd
+  k8s:
+    state: "{{ state }}"
+    definition: "{{ lookup('template', role_path + '/templates/cluster-role.yaml.j2') }}"
+  run_once: true
+
+- name: deploy cluster role binding for fluentd
+  k8s:
+    state: "{{ state }}"
+    definition: "{{ lookup('template', role_path + '/templates/cluster-role-binding.yaml.j2') }}"
+  run_once: true
+
 - name: deploy fluentd log forwarder on k8s
   k8s:
     state: "{{ state }}"
-    definition: "{{ lookup('template', role_path + '/templates/fluentd-kubernetes-daemonset.yml.j2') }}"
-    force: yes
+    definition: "{{ lookup('template', role_path + '/templates/fluentd-kubernetes-daemonset.yaml.j2') }}"
   run_once: true
