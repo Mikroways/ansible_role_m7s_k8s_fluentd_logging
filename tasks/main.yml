@@ -4,12 +4,12 @@
 - name: check fluentd logging is enabled
   set_fact:
     state: present
-  when: fluentd_logging_syslog_enabled == true
+  when: m7s_k8s_fluentd_logging_syslog_enabled == true
 
 - name: check fluentd logging is disabled
   set_fact:
     state: absent
-  when: fluentd_logging_syslog_enabled == false
+  when: m7s_k8s_fluentd_logging_syslog_enabled == false
 
 - name: deploy service account for fluentd
   k8s:
